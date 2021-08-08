@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+<style>
+    #demo {
+            background: #fff;
+            white-space: pre-wrap;
+            font-family: monospace;
+    }
+    #canvas {
+        border: 1px solid #c4c4c4;
+        border-radius: 2%;
+        width: 250px;
+        padding: 10px;
+        margin: 20px;
+    }
+
+</style>
+</head>
+<body>
+
+    <div id="canvas">
+        <div id="demo">Content On Load</div>
+    </div>
+
+    <script src="../dist/plain-receipt.js" ></script>
+    <script>
+        // max_character: number
+        // near_space_by_position?: number
+        // space_character: string
+        // spaceBetween, loopingText, centerPosition, justifyContent, convertString
+        const {spaceBetween, loopingText, centerPosition, justifyContent, convertString} = plainreceipt({max_character: 32, near_space_by_position: 1, space_character: '\xa0'})
+
+        const app = document.querySelector("#demo");
+        app.innerHTML = convertString(
+            [
+                centerPosition("MINI MART"),
+                centerPosition("06 Kemper Lane, Salt Lake City"),
+                loopingText("*"),
+                justifyContent([
+                    ["1x Tomatoes 500g", ": $1.50"],
+                    ["2x Baby Corn 90g", ": $4.10"],
+                    ["2x Red Chili 100g", ": $3.20"],
+                    ['[:divider]', '*'],
+                    ["Sub Total", ": $8.80"],
+                    ["discount", ": $0.80"],
+                    ["Total", ": $8.00"],
+                    ['[:divider]', '*'],
+                    ["Cash", ": $10.00"],
+                    ["Return", ": $2.00"],
+                ]),
+                loopingText("\xa0"),
+                loopingText("\xa0"),
+                centerPosition("MINI MART"),
+                centerPosition("06 Kemper Lane, Salt Lake City"),
+                loopingText("="),
+                justifyContent([
+                    ["1x Tomatoes 500g :", "$1.50"],
+                    ["2x Baby Corn 90g :", "$4.10"],
+                    ["2x Red Chili 100g :", "$3.20"],
+                    ['[:divider]', '='],
+                    ["Sub Total :", "$8.80"],
+                    ["discount :", "$0.80"],
+                    ["Total :", "$8.00"],
+                    ['[:divider]', '='],
+                    ["Cash :", "$10.00"],
+                    ["Return :", "$2.00"],
+                ], 'right'),
+                loopingText("\xa0"),
+                loopingText("\xa0"),
+                centerPosition("MINI MART"),
+                centerPosition("06 Kemper Lane, Salt Lake City"),
+                loopingText("="),
+                spaceBetween(["1x", "Tomatoes 500g", "$1.50"]),
+                spaceBetween(["2x", "Baby Corn 90g", "$4.10"])
+            ]
+        )
+        console.log(spaceBetween(["Tomatoes 500g", "1x", "$1.50"], function(content, space, func) {
+            console.log(space)
+            return func(content)
+        }))
+    </script>
+
+</body>
+</html>

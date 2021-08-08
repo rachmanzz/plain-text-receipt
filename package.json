@@ -1,5 +1,18 @@
 {
   "devDependencies": {
+    "@rollup/plugin-node-resolve": "^13.0.4",
+    "@rollup/plugin-typescript": "^8.2.5",
+    "rollup": "^2.56.0",
+    "tslib": "^2.3.0",
     "typescript": "^4.3.5"
+  },
+  "name": "plain-text-receipt",
+  "version": "0.1",
+  "main": "index.js",
+  "repository": "git@github.com:rachmanzz/plain-text-receipt.git",
+  "author": "Muhammad Abdurrahman <rachman.sd@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "rollup": "rollup -c"
   }
 }
