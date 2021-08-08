@@ -2,9 +2,11 @@
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^13.0.4",
     "@rollup/plugin-typescript": "^8.2.5",
+    "@types/uglify-js": "^3.13.1",
     "rollup": "^2.56.0",
     "tslib": "^2.3.0",
-    "typescript": "^4.3.5"
+    "typescript": "^4.3.5",
+    "uglify-js": "^3.14.1"
   },
   "name": "plain-text-receipt",
   "version": "0.1",
@@ -13,6 +15,9 @@
   "author": "Muhammad Abdurrahman <rachman.sd@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "rollup": "rollup -c"
+    "rollup": "rollup -c",
+    "minify" : "uglifyjs ./dist/plain-receipt.js --compress --mangle  -o ./dist/plain-receipt.min.js",
+    "copy":  "cp ./dts/index.d.ts ./dist/plain-receipt.min.d.ts",
+    "build": "yarn rollup && yarn minify && yarn copy"
   }
 }

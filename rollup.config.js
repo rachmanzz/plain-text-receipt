@@ -4,12 +4,12 @@ export default {
     input: "./src/index.ts",
     output: {
       file: "./dist/plain-receipt.js",
-      format: "iife",
+      format: "umd",
       name: "plainreceipt"
     },
     plugins: [
       nodeResolve(),
-      typescript({lib: ["es5", "es6", "dom"], target: "es5"})
+      typescript({lib: ["es5", "es6", "dom"], target: "es5", declaration: true})
     ]
 };
 
