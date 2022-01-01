@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Page Title</title>
+<title>Plain Receipt</title>
 <style>
-    #demo {
+    .demo {
             background: #fff;
             white-space: pre-wrap;
             font-family: monospace;
     }
-    #canvas {
+    .canvas {
         border: 1px solid #c4c4c4;
         border-radius: 2%;
         width: 250px;
@@ -16,15 +16,72 @@
         margin: 20px;
     }
 
+    .editor { 
+        position: relative;
+        height: 100px;
+        width: 500px;
+    }
+
 </style>
+
 </head>
 <body>
-
-    <div id="canvas">
-        <div id="demo">Content On Load</div>
+    <h2>EXAMPLE</h2>
+    <div class="canvas">
+        <div id="demo" class="demo">Content On Load</div>
+    </div>
+    <h4>* Center</h4>
+    <div class="editor">
+        convertString([
+            centerPosition("MINI MART"),
+        ])
+    </div>
+    <div class="canvas">
+        <div id="center" class="demo">Content in center</div>
+    </div>
+    <h4>* Loop</h4>
+    <div class="editor">
+        convertString([
+            loopingText("*"),
+        ])
+    </div>
+    <div class="canvas">
+        <div id="loop" class="demo">Loop</div>
+    </div>
+    <h4>* Space Between</h4>
+    <div class="editor">
+        convertString([
+            spaceBetween(["1x", "Tomatoes 500g", "$1.50"]),
+        ])
+    </div>
+    <div class="canvas">
+        <div id="spacebetween" class="demo">spaceBetween</div>
+    </div>
+    <h4>* Justify Content => Left</h4>
+    <div class="editor">
+        convertString([
+            justifyContent([
+                ["1x Tomatoes 500g", ": $1.50"],
+            ]),
+        ])
+    </div>
+    <div class="canvas">
+        <div id="justify" class="demo">Justify Content</div>
+    </div>
+    <h4>* Justify Content => Right</h4>
+    <div class="editor">
+        convertString([
+            justifyContent([
+                ["1x Tomatoes 500g", ": $1.50"],
+            ], 'right'),
+        ])
+    </div>
+    <div class="canvas">
+        <div id="justifyright" class="demo">Justify Content</div>
     </div>
 
     <script src="./plain-receipt.min.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.13/ace.js"></script>
     <script>
         // max_character: number
         // near_space_by_position?: number
@@ -80,6 +137,47 @@
             console.log(space)
             return func(content)
         }))
+
+        const center = document.querySelector("#center");
+        center.innerHTML = convertString([
+            centerPosition("MINI MART"),
+        ])
+
+        const loop = document.querySelector("#loop");
+        loop.innerHTML = convertString([
+            loopingText("*"),
+        ])
+
+        const spacebetween = document.querySelector("#spacebetween");
+        spacebetween.innerHTML = convertString([
+            spaceBetween(["1x", "Tomatoes 500g", "$1.50"]),
+        ])
+
+        const justify = document.querySelector("#justify");
+        justify.innerHTML = convertString([
+            justifyContent([
+                ["1x Tomatoes 500g", ": $1.50"],
+            ]),
+        ])
+
+        
+        const justifyright = document.querySelector("#justifyright");
+        justifyright.innerHTML = convertString([
+            justifyContent([
+                ["1x Tomatoes 500g", ": $1.50"],
+            ], 'right'),
+        ])
+
+        var editors = document.querySelectorAll('.editor')
+        if (editors) {
+            for (let item of editors){
+                var code = ace.edit(item);
+                code.setTheme("ace/theme/monokai");
+                code.session.setMode("ace/mode/javascript");
+            }
+        }
+
+        
     </script>
 
 </body>
